@@ -108,3 +108,97 @@ let deleteLead = async (id) =>{
 
         displayCurrentConnections();
 }
+
+
+
+
+
+
+
+
+/////////////////////// lead functionality //////////////////////////
+
+
+let sendLeadToClient = async (lead, clientEmail, agentEmail) => { 
+
+        
+
+     
+    await fetch(dataEmailUrl,{
+     method: 'POST',
+     headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "*",
+         "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+     }, 
+     body:JSON.stringify({
+         lead : lead , 
+         clientEmail : clientEmail,
+         agentEmail : agentEmail
+     })
+ }).then(response => response.json()).then(async (data) => {
+ 
+         return data;
+ 
+   }).catch((err) => {
+     console.log(err);
+   });
+
+
+
+}
+
+
+
+let updateTheClient = async (id, client) => { 
+
+ console.log(`${id}-${client}`);
+
+ await fetch(`${BASE_URL}/leads/update/${id}/${client}`,{
+
+     method: 'PUT',
+     headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "*",
+         "Access-Control-Allow-Headers": " Origin, X-Requested-With, Content-Type, Accept, Authorization"
+     }
+ }).then(response => response.json()).then(async (data) => {
+
+   console.log(data);
+ 
+   }).catch((err) => {
+     console.log(err);
+   });
+
+}
+
+
+
+let sendSMS = async (clientName, apiKey, apiSecret, leadPhone) => {
+
+
+ await fetch(`${dataSMSUrl}/${clientName}/${apiKey}/${apiSecret}/${leadPhone}`,{
+     method: 'GET',
+     headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "*",
+         "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+     }
+ }).then(response => response.json()).then(async (data) => {
+ 
+     console.log(data);
+     
+ }).catch((err) => {
+   console.log(err);
+ });
+
+
+
+}
+

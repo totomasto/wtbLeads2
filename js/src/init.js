@@ -40,13 +40,10 @@ let fetchDataFromAPI = async () => {
                 await queryAPI(url, 'GET', '',(err, data)=>{
                     if(err) console.log(err);
                     
-                    if(localStorage.getItem('leadsData')){
-                        console.log('No need for lead update...');
-                        // compareLeadsWithLocal(data);
-                    } else { 
+                   
                         let convertedData = JSON.stringify(data);
                         localStorage.setItem('leadsData', convertedData);
-                    } 
+                    
 
                 });
 
@@ -55,13 +52,10 @@ let fetchDataFromAPI = async () => {
 
                     if(err) console.log(err);
 
-                    if(localStorage.getItem('clientsData')){
-                        console.log('No need for clients update...');
-                        // conmpareClientsWithLocal(data);
-                    } else { 
+               
                         let convertedData = JSON.stringify(data);
                         localStorage.setItem('clientsData', convertedData);
-                    }
+               
 
 
                 });

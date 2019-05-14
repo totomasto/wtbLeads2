@@ -5,47 +5,49 @@
 
         console.log(connectionId,clientEmail, clientName, leadPhone, agentEmail);
         
-        Object.keys(localStorage).forEach(function(key){
+        let leadsData = JSON.parse(localStorage.getItem('leadsData'));
 
-            if(key.includes(connectionId)){
-               console.log(JSON.parse(localStorage.getItem(key)));
-            }
-    
-    
-        });
-    
+        leadsData.forEach(async (lead)=>{
+
+            if(lead.id == connectionId){
+             
+           
 
 
 
-                // // not used for testing it fully works 
-                // // sending email with the data and client email address
+                // not used for testing it fully works 
+                // sending email with the data and client email address
 
-                // if( await sendLeadToClient(lead, clientEmail, agentEmail)) console.log('Email was sent succesfully');
+                if( await sendLeadToClient(lead, clientEmail, agentEmail)){ console.log('Email was sent succesfully');}
 
                 
 
 
-                // //Ideea : send SMS see if they re ok with it 
-                // await sendSMS(clientName, '7830e32b', 'Macboopro2012', leadPhone);
+                //Ideea : send SMS see if they re ok with it 
+                await sendSMS(clientName, '7830e32b', 'Macboopro2012', leadPhone);
                   
     
-                // // making put request to the API to update the client and the status of the lead
-                // await updateTheClient(lead.id, clientName);
+                // making put request to the API to update the client and the status of the lead
+                await updateTheClient(lead.id, clientName);
 
 
-                // //delete the lead so its updated and we have no use of it 
-                // // using the function that deletes (see up)
-                // await deleteLead(connectionId);
+                //delete the lead so its updated and we have no use of it 
+                // using the function that deletes (see up)
+                await deleteLead(connectionId);
 
-                // //also needed is the disabling of all the buttons if the lead is proccesed 
+                //also needed is the disabling of all the buttons if the lead is proccesed 
 
 
-                // //reload the page -> its easier and kinda safe 
-                // // I tried to reload just the table but its much more effective to reload the page 
-                // // the reload is happening inside the deleteLead function, await doesnt seem to work, it reloads before the functions are finishing
+                //reload the page -> its easier and kinda safe 
+                // I tried to reload just the table but its much more effective to reload the page 
+                // the reload is happening inside the deleteLead function, await doesnt seem to work, it reloads before the functions are finishing
                 
-                // location.reload();
+                location.reload();
+            }
 
+
+        });
+    
          
     }
 
@@ -132,7 +134,7 @@ let displayCurrentConnections = async () => {
 
         }
      });
-     console.log(connectionsData);
+    //  console.log(connectionsData);
         // actually displaying the table :D 
         let connectionsTable = document.getElementById('connections');
         $("#connections tr").remove(); 
@@ -156,7 +158,7 @@ connectionsData.forEach((element)=>{
                 cell6.innerHTML = "Email : " + element.clientEmail;
                 cell7.innerHTML = ` <button class="btn btn-success" type="button" onclick="processLead('${element.id}','${element.clientEmail}','${element.clientName}','${element.phone}','${element.agentEmail}')" >Trimite lead</button> 
                  <button class="btn btn-danger" type="button" onclick="deleteLead('${element.id}')" >Sterge lead</button>`;
-            });
+});
 
 
 
