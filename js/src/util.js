@@ -23,6 +23,36 @@ let queryAPI = async (url, method, body, callback) => {
 }
 
 
+
+let webImport = async () => {
+
+    await fetch(webImportUrl,{
+       method: 'GET',
+       headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/json',
+           "Access-Control-Allow-Origin": "*",
+           "Access-Control-Allow-Methods": "*",
+           "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+       }, 
+     
+   }).then(response => response.json()).then(async (data) => {
+   
+           return data;
+   
+     }).catch((err) => {
+       console.log(err);
+     });
+
+    //    location.reload();
+
+}   
+
+
+
+
+
+
 let changeBtn = async (id) => {
       await checkIfOtherBtnIsPressed(id);
     let button = document.getElementById(id);
@@ -107,6 +137,26 @@ let deleteLead = async (id) =>{
 
 
         displayCurrentConnections();
+}
+
+
+
+let displayObsModal = async (id) => {
+
+
+    let leadsData = JSON.parse(localStorage.getItem('leadsData'));
+
+    leadsData.forEach(async (lead)=>{
+
+        if(lead.id == id){
+
+            alert(lead.obs);
+
+        }
+
+});
+
+
 }
 
 

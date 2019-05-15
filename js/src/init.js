@@ -9,6 +9,16 @@ let webImportUrl = `${BASE_URL}/wp/get`;
 
 
 
+//making import from wp every 20 seconds 
+setTimeout(webImport, 20000);
+
+
+
+
+
+
+
+
 let removeLocalData = async () => {
 
     if(localStorage.getItem('lead')){ localStorage.removeItem('lead'); }
@@ -82,7 +92,8 @@ let renderTables = async () => {
                         
                         
                     }).clear().draw();
-
+                    leadsTable.order([0,'desc']).draw();
+                   
                     const clientsTable =  $('#clientsTable').DataTable({
                         "lengthChange": false,
                         "pageLength" : 50,
@@ -97,11 +108,11 @@ let renderTables = async () => {
                     // extracting data from localstorage leads and adding rows inside datatable
                     
                     JSON.parse(localStorage.getItem('leadsData')).forEach(async (element)=>{
-
+                        // if(element.status === 'Neprocesat'){
                         //filtering for today + yesterday
                         let today = new Date().toISOString().slice(0, 10);
                         let yesterday = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
-
+                        let applyBtn = (element.status === 'Neprocesat') ? `<button type="button" class="btn btn-success btn-sm" onclick="changeBtn(this.id);" id="${element.id}">Aplica</button>` : '';
 
 
                     // adding the rows to the table
@@ -112,18 +123,19 @@ let renderTables = async () => {
                         `${element.email}<br>${element.phone}`,
                         `${element.region}<br>${element.city}`,
                         element.status,
+                        `<button class="btn btn-primary btn-sm" onclick="displayObsModal('${element.id}');" >Obs</button>`,
                         element.client,
                         element.reason,
                         element.date,
-                        `<button type="button" class="btn btn-success btn-sm" onclick="changeBtn(this.id);" id="${element.id}">Aplica</button>`,
+                        applyBtn,
                         element.obs,     // hidden column
                         element.phone    // hidden column
                         // also needs unfilter , thats for later :D 
                     ]);
                     }
-
+                // }
                     });
-
+               
                     leadsTable.draw();
 
 
