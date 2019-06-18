@@ -116,7 +116,7 @@ let renderTables = async () => {
 
 
                     // adding the rows to the table
-                    if(element.date.slice(0,10) === today || element.date.slice(0,10) === yesterday){ 
+                    // if(element.date.slice(0,10) === today || element.date.slice(0,10) === yesterday){ 
                     leadsTable.row.add([
                         element.id,
                         element.name,
@@ -132,7 +132,7 @@ let renderTables = async () => {
                         element.phone    // hidden column
                         // also needs unfilter , thats for later :D 
                     ]);
-                    }
+                    // }
                 // }
                     });
                

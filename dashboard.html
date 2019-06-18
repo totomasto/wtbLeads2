@@ -37,7 +37,8 @@
         <!-- Page Container -->
         <div class="page-container">
          <!-- Page Sidebar -->
-         <div class="page-sidebar">
+          <!-- Page Sidebar -->
+          <div class="page-sidebar">
             <a class="logo-box" href="index.html">
                 <span>WTB Leads</span> 
                 <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
@@ -47,18 +48,18 @@
                 <div class="page-sidebar-menu">
                     <ul class="accordion-menu">
                         <li>
-                            <a href="dashboard.html">
+                            <a href="/dashboard">
                                 <i class="menu-icon icon-home4"></i><span>Dashboard</span>
                             </a>
                         </li>
                         <li class="active-page">
-                            <a href="index.html">
+                            <a href="/">
                                 <i class="menu-icon icon-inbox"></i><span>Flux lead-uri</span>
                             </a>
                         </li>
                        
                         <li>
-                            <a href="charts.html">
+                            <a href="/charts">
                                 <i class="menu-icon icon-show_chart"></i><span>Rapoarte</span>
                             </a>
                         </li>
@@ -176,8 +177,8 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">$781,876</span>
-                                            <p class="stats-info">Total Income</p>
+                                            <span class="stats-number" id="totalLeads">833</span>
+                                            <p class="stats-info">Total lead-uri all-time</p>
                                         </div>
                                         <div class="pull-right">
                                             <i class="icon-arrow_upward stats-icon"></i>
@@ -189,21 +190,8 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">578,100</span>
-                                            <p class="stats-info">Downloads</p>
-                                        </div>
-                                        <div class="pull-right">
-                                            <i class="icon-arrow_downward stats-icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="panel panel-white stats-widget">
-                                    <div class="panel-body">
-                                        <div class="pull-left">
-                                            <span class="stats-number">+23,356</span>
-                                            <p class="stats-info">New Registrations</p>
+                                            <span class="stats-number" id="totalWon"></span>
+                                            <p class="stats-info">Total castigate</p>
                                         </div>
                                         <div class="pull-right">
                                             <i class="icon-arrow_upward stats-icon"></i>
@@ -215,8 +203,21 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">58%</span>
-                                            <p class="stats-info">Finished Tasks</p>
+                                            <span class="stats-number" id="totalLost"></span>
+                                            <p class="stats-info">Total pierdute</p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <i class="icon-arrow_upward stats-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="panel panel-white stats-widget">
+                                    <div class="panel-body">
+                                        <div class="pull-left">
+                                            <span class="stats-number" id="totalWait"></span>
+                                            <p class="stats-info">Total in asteptare </p>
                                         </div>
                                         <div class="pull-right">
                                             <i class="icon-arrow_upward stats-icon"></i>
@@ -226,14 +227,26 @@
                             </div>
                         </div><!-- Row -->
                         <div class="row">
+                        <div class="col-md-6">
                             <div class="panel panel-white">
                                 <div class="panel-body"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
                                     <div class="panel-heading clearfix">
-                                        <h4 class="panel-title">Line</h4>
+                                        <h4 class="panel-title">Bar</h4>
                                     </div>
-                                    <canvas id="chart1" width="599" height="299" style="display: block; width: 599px; height: 299px;"></canvas>
+                                    <canvas id="chart2" width="454" height="227" style="display: block; width: 454px; height: 227px;"></canvas>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                        <div class="panel panel-white">
+                                <div class="panel-body"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                                    <div class="panel-heading clearfix">
+                                        <h4 class="panel-title">Doughnut</h4>
+                                    </div>
+                                    <canvas id="chart4" width="454" height="454" style="display: block; width: 454px; height: 454px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
                         </div><!-- Row -->
                         <div class="row">
                             <div class="col-lg-5 col-md-12">
@@ -582,5 +595,6 @@
         <script src="plugins/chartjs/chart.min.js"></script>
         <script src="js/space.min.js"></script>
         <script src="js/pages/dashboard.js"></script>
+        <script src="js/src/dashboard/index.js"></script>
     </body>
 </html>
