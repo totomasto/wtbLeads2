@@ -252,3 +252,30 @@ let sendSMS = async (clientName, apiKey, apiSecret, leadPhone) => {
 
 }
 
+
+
+let deleteLeadFromDB = async (id) => { 
+
+    await fetch(`${deleteLeadUrl}/${id}`,{
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+        }, 
+      
+    }).then(response => response.json()).then(async (data) => {
+    
+            console.log(data);
+    
+      }).catch((err) => {
+        console.log(err);
+      });
+
+
+        location.reload();
+
+}
+

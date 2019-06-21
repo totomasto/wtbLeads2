@@ -6,6 +6,7 @@ let paramUrl = `${BASE_URL}/nav/leads/clients/selection`;
 let dataEmailUrl = `${BASE_URL}/leads/email`;
 let dataSMSUrl = `${BASE_URL}/leads/sms`;
 let webImportUrl = `${BASE_URL}/wp/get`;
+let deleteLeadUrl = `${BASE_URL}/leads/delete`;
 
 
 
@@ -127,7 +128,8 @@ let renderTables = async () => {
                         element.client,
                         element.reason,
                         element.date,
-                        applyBtn,
+                        `${applyBtn} -
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteLeadFromDB('${element.id}');">Sterge</button>`,
                         element.obs,     // hidden column
                         element.phone    // hidden column
                         // also needs unfilter , thats for later :D 
