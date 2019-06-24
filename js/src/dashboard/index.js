@@ -7,7 +7,7 @@ let displayStats = async () => {
         leads.forEach(element => {
 
             leadsTotal++;
-            if(element.status === 'In lucru') leadsWait++;
+            if(element.status === 'In asteptare') leadsWait++;
             if(element.status === 'Pierdut') leadsLost++;
             if(element.status === 'Finalizat') leadsWon++;
 
