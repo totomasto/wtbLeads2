@@ -19,8 +19,8 @@ let populateRemindersTable = async () => {
             if(currentMonth === leadMonth){ // if they re equal we can make the difference between the days 
             currentDate = currentDate.getDate(); // getting the current day of the month 
             let difference = lead.sent_date.split("-",3)[2].substring(0,2) - currentDate; // making the difference between lead day and current day  
-            
-            if(difference <= 7 && lead.status === 'In lucru'){ // if difference <= 7 days we have the possibility to remind 
+            // console.log(difference);
+            if(difference*(-1) >= 7 && lead.status === 'In lucru'){ // if difference <= 7 days we have the possibility to remind 
 
                 // we re getting all the leads id to populate table
                 leadIDs.push(lead.id);
@@ -35,6 +35,64 @@ let populateRemindersTable = async () => {
 
 
 }
+
+
+let populateTheActualTable = async (leads)=>{
+
+      // using jQuery for the Datatable
+      const remindersTable = $('#remindersTable').DataTable({
+        "lengthChange": false,
+        "pageLength" : 20,
+        "scrollY": "600px",
+        "responsive" : true,
+        "deferRender" : true,
+
+
+}).clear().draw();
+
+
+leads.forEach((id)=>{
+
+        JSON.parse(localStorage.getItem('leadsData')).forEach((lead)=>{
+
+            if(lead.id === id){
+                
+                remindersTable.row.add([
+
+                    lead.id, 
+                    lead.name,
+                    lead.sent_date, 
+                    lead.client,
+                    `<button class='btn btn-success btn-sm' onclick='remindClient("${lead.id}","${lead.client}")'>Remind</button>`
+
+                ]);
+
+            }
+
+
+        });
+
+
+})
+
+remindersTable.draw();
+
+}
+
+
+
+let remindClient = async(leadID, clientName) => { 
+
+            console.log(leadID, clientName);
+
+
+
+}
+
+
+
+
+
 
 
 populateRemindersTable();
