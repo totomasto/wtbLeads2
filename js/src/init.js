@@ -4,6 +4,7 @@ let url = `${BASE_URL}/leads/select`;
 let clientsUrl = `${BASE_URL}/nav/leads/clients`;
 let paramUrl = `${BASE_URL}/nav/leads/clients/selection`;
 let dataEmailUrl = `${BASE_URL}/leads/email`;
+let reminderDataEmailUrl = `${BASE_URL}/leads/email/remind`;
 let dataSMSUrl = `${BASE_URL}/leads/sms`;
 let webImportUrl = `${BASE_URL}/wp/get`;
 let deleteLeadUrl = `${BASE_URL}/leads/delete`;

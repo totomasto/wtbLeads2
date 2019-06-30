@@ -16,8 +16,9 @@ let populateRemindersTable = async () => {
             let leadMonth = lead.sent_date.split("-",3)[1] // we re getting the lead month in "00" format
             
 
-            if(currentMonth === leadMonth){ // if they re equal we can make the difference between the days 
-            currentDate = currentDate.getDate(); // getting the current day of the month 
+            if('06' === leadMonth){ // if they re equal we can make the difference between the days 
+            // currentDate = currentDate.getDate(); // getting the current day of the month 
+            currentDate = '30';
             let difference = lead.sent_date.split("-",3)[2].substring(0,2) - currentDate; // making the difference between lead day and current day  
             // console.log(difference);
             if(difference*(-1) >= 7 && lead.status === 'In lucru'){ // if difference <= 7 days we have the possibility to remind 
@@ -30,7 +31,7 @@ let populateRemindersTable = async () => {
             }
         });
 
-
+        // console.log(leadIDs);
         await populateTheActualTable(leadIDs);
 
 
@@ -83,7 +84,53 @@ remindersTable.draw();
 
 let remindClient = async(leadID, clientName) => { 
 
-            console.log(leadID, clientName);
+            // console.log(leadID, clientName);
+            
+    let lead={}, clientEmail, agentEmail;
+
+    JSON.parse(localStorage.getItem('leadsData')).forEach((element)=>{
+        // console.log(element.id);
+        if(element.id == leadID){
+            lead = element;
+            lead.sent_date = lead.sent_date.slice(0,10);
+            // console.log('Test');
+        }
+
+    });
+
+
+    JSON.parse(localStorage.getItem('clientsData')).forEach((element)=>{
+        if(element.Name === clientName){
+            clientEmail = element.E_Mail;
+            agentEmail = element.email_agent;
+        }
+    })
+
+
+    // console.log(lead, clientEmail, agentEmail);
+
+               
+    await fetch(reminderDataEmailUrl,{
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+        }, 
+        body:JSON.stringify({
+            lead : lead , 
+            clientEmail : clientEmail,
+            agentEmail : agentEmail
+        })
+    }).then(response => response.json()).then(async (data) => {
+    
+            return data;
+    
+      }).catch((err) => {
+        console.log(err);
+      });
 
 
 
