@@ -48,6 +48,13 @@ let populateTheActualTable = async (leads)=>{
         "scrollY": "600px",
         "responsive" : true,
         "deferRender" : true,
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
 
 
 }).clear().draw();
@@ -183,6 +190,7 @@ let populateLogsTable = async () => {
         "scrollY": "600px",
         "responsive" : true,
         "deferRender" : true,
+
 
 
         }).clear().draw();

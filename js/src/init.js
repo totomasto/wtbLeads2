@@ -92,6 +92,13 @@ let renderTables = async () => {
                         "scrollY": "600px",
                         "responsive" : true,
                         "deferRender" : true,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copyHtml5',
+                            'excelHtml5',
+                            'csvHtml5',
+                            'pdfHtml5'
+                        ]
                         
                         
                     }).clear().draw();
@@ -102,7 +109,14 @@ let renderTables = async () => {
                         "pageLength" : 50,
                         "scrollY": "600px",
                         "deferRender" : true,
-                        "columnDefs"  : [ {'targets': 0, 'searchable': false} ]
+                        "columnDefs"  : [ {'targets': 0, 'searchable': false} ],
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copyHtml5',
+                            'excelHtml5',
+                            'csvHtml5',
+                            'pdfHtml5'
+                        ]
                     
                     }).clear().draw();
 
