@@ -1,6 +1,7 @@
 
 
 
+
 // prelucram data -lead its all in house nu cred ca se va lega la API momentan 
 // 25.06 ROM-FRA ---- remember
 
@@ -124,9 +125,18 @@ let remindClient = async(leadID, clientName) => {
             clientEmail : clientEmail,
             agentEmail : agentEmail
         })
-    }).then(response => response.json()).then(async (data) => {
-    
-            return data;
+    }).then(async (response) => {
+
+        console.log(response.status);
+           await updateLeadDate(leadID)
+           .then(async ()=>{
+            $('#remindersTable').DataTable().destroy();
+            await removeLocalData();
+            await fetchDataFromAPI();
+            displayCurrentConnections();
+            populateRemindersTable();
+        })
+           .catch((err)=>console.log(err));
     
       }).catch((err) => {
         console.log(err);
@@ -135,6 +145,89 @@ let remindClient = async(leadID, clientName) => {
 
 
 }
+
+
+let updateLeadDate = (leadID) => { return new Promise (async (resolve, reject)=>{
+    console.log('Test');
+        await fetch(`${updateLeadDateUrl}/${leadID}`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+            }
+        }).then((response)=>{
+
+            resolve(response.status);
+
+        }).catch((err)=>{
+            reject(err);
+        });
+
+
+});
+}
+
+
+
+
+let populateLogsTable = async () => { 
+
+    $('#remindersLogsTable').DataTable().destroy();
+         // using jQuery for the Datatable
+      const remindersLogsTable = $('#remindersLogsTable').DataTable({
+        "lengthChange": false,
+        "pageLength" : 20,
+        "scrollY": "600px",
+        "responsive" : true,
+        "deferRender" : true,
+
+
+        }).clear().draw();
+
+
+
+        // we query for leads
+        await queryAPI(logsRemindersUrl, 'GET', '',(err, data)=>{
+            if(err) console.log(err);
+            
+           
+               
+                
+                row = data[0];
+
+            
+                JSON.parse(localStorage.getItem('leadsData')).forEach((lead)=>{
+                    if(row.lead_id == lead.id){
+                                           
+                        remindersLogsTable.row.add([
+
+                            lead.id, 
+                            lead.name,
+                            lead.date,
+                            lead.sent_date, 
+                            lead.client,
+                            'No data for now '        
+                        ]);
+                    
+                    }
+
+                });
+            
+                remindersLogsTable.draw();
+
+        });
+
+
+
+
+}
+
+
+
+
 
 
 

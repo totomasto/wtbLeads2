@@ -8,7 +8,8 @@ let reminderDataEmailUrl = `${BASE_URL}/leads/email/remind`;
 let dataSMSUrl = `${BASE_URL}/leads/sms`;
 let webImportUrl = `${BASE_URL}/wp/get`;
 let deleteLeadUrl = `${BASE_URL}/leads/delete`;
-
+let updateLeadDateUrl = `${BASE_URL}/leads/reminder/date`;
+let logsRemindersUrl = `${BASE_URL}/reminders/logs`;
 
 
 //making import from wp every 20 seconds 
