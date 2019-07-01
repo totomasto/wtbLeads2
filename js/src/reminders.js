@@ -209,13 +209,12 @@ let populateLogsTable = async () => {
             if(err) console.log(err);
             
            
-               
-                
-                row = data[0];
-
+           
             
                 JSON.parse(localStorage.getItem('leadsData')).forEach((lead)=>{
-                    if(row.lead_id == lead.id){
+
+                    data.forEach((element)=>{
+                    if(element.lead_id == lead.id){
                                            
                         remindersLogsTable.row.add([
 
@@ -228,7 +227,7 @@ let populateLogsTable = async () => {
                         ]);
                     
                     }
-
+                  })
                 });
             
                 remindersLogsTable.draw();
