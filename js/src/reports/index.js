@@ -32,7 +32,7 @@ let exportReportGeneral = async () => {
 let downloadFile = async (filename)=>{
   // let path = `http://localhost:5000/reports`;
   // console.log(`${path}/${filename}`);
-  let path = `http://192.168.1.252/reports`;
+  let path = `http://192.168.1.252:5000/reports`;
   let link = document.createElement('a');
   link.setAttribute('href',`${path}/${filename}`); 
   link.setAttribute('type','application/octet-stream');
