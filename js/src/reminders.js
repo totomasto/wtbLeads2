@@ -190,6 +190,13 @@ let populateLogsTable = async () => {
         "scrollY": "600px",
         "responsive" : true,
         "deferRender" : true,
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
 
 
 

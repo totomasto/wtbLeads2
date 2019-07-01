@@ -17,8 +17,7 @@ let exportReportGeneral = async () => {
         
     }).then(response => response.json()).then(async (data) => {
     
-            console.log(data);
-    
+           await setTimeout(function(){downloadFile(data.filename)}, 2000);
       }).catch((err) => {
         console.log(err);
       });
@@ -27,3 +26,19 @@ let exportReportGeneral = async () => {
 
 
 }
+
+
+
+let downloadFile = async (filename)=>{
+  // let path = `http://localhost:5000/reports`;
+  // console.log(`${path}/${filename}`);
+  let path = `http://192.168.1.252/reports`;
+  let link = document.createElement('a');
+  link.setAttribute('href',`${path}/${filename}`); 
+  link.setAttribute('type','application/octet-stream');
+  
+  link.click();
+  // stop loading screen 
+  // loadingModal(false);
+  
+  }
