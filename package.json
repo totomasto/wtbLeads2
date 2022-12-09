@@ -19,6 +19,6 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "exceljs": "^1.12.2",
-    "express": "^4.16.4"
+    "express": "^4.17.3"
   }
 }
